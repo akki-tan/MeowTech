@@ -1,4 +1,5 @@
 <x-layout>
+    {{-- tes nambah komen --}}
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         <div class="bg-white rounded-2xl border border-untukhoverar p-4 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all">
