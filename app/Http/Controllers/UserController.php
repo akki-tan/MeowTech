@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
-
-
 class UserController extends Controller
 {
     public function cek(Request $request)
@@ -23,13 +21,12 @@ class UserController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user);
             if (strtolower($user->name) === 'admin') {
-                return redirect('/admin/artikel');
+                return redirect('/admin');
             }
             return redirect('/home');
         }
         return redirect('/login')->with('error', 'Data login salah!');
     }
-
     public function simpan(Request $request)
     {
         User::create([
@@ -52,34 +49,28 @@ class UserController extends Controller
         Article::create($request->all());
         return redirect('/admin/artikel')->with('success', 'Artikel berhasil ditambahkan!');
     }
-
     public function editArtikel($id)
     {
         $article = Article::findOrFail($id);
         return view('editartikel', compact('article'));
     }
-
     public function updateArtikel(Request $request, $id)
     {
         $article = Article::findOrFail($id);
-
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|unique:articles,slug,' . $id,
             'author' => 'required|string|max:255',
             'body' => 'required|string',
         ]);
-
         $article->update([
             'title' => $request->title,
             'slug' => $request->slug,
             'author' => $request->author,
             'body' => $request->body,
         ]);
-
         return redirect('/admin/artikel')->with('success', 'Artikel berhasil diperbarui!');
     }
-
     public function deleteArtikel($id)
     {
         $article = Article::findOrFail($id);
@@ -87,5 +78,4 @@ class UserController extends Controller
 
         return redirect('/admin/artikel')->with('success', 'Artikel berhasil dihapus!');
     }
-
 }

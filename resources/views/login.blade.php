@@ -15,7 +15,6 @@
         <form action="/cek" method="POST" class="bg-untuktext p-8 rounded-2xl shadow-md w-full max-w-md font-fredoka">
             @csrf
             <h2 class="text-2xl font-bold text-center text-untukbg mb-6">Login</h2>
-
             <div class="mb-4">
                 <label for="name" class="block text-untukbg font-medium mb-2">Nama</label>
                 <input type="name" name="name"
@@ -43,7 +42,6 @@
             </button>
         </form>
     </div>
-
 </body>
 
 </html>
